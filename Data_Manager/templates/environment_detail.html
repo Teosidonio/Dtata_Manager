@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content-header %}
+<div class="card-header">
+  <div class="card-tools">
+    <a href="#" class="btn btn-tool">Print</a>
+    <a href="{% url 'environment-update' object.id %}" class="btn btn-tool">
+      <i class="fas fa-edit"></i>
+    </a>
+    <a href="{% url 'environment-delete' object.id %}" class="btn btn-tool">
+      <i class="fas fa-times"></i>
+    </a>
+  </div>
+</div>
+{% endblock content-header %}
+
+{% block content %}
+    <div class="row mb-4">
+      <div class="col-sm-4">
+        <div class="row mb-2">
+
+          {% if object.brd %}
+            <img
+              src="{{ object.brd.url }}"
+              class="float-left rounded-circle mr-3" style="width: 120px; height: 120px;">
+          {% else %}
+            <img
+              src="{% static 'dist/img/avatar.png' %}"
+              class="float-left rounded-circle mr-3" style="width: 120px; height: 120px;">
+          {% endif %}
+
+
+          <div class="float-right">
+            <h4>{{ object.Stage}} </h4>
+            <h4>{{ object.Platform}} </h4>
+            <h4>{{ object.Database}} </h4>
+            <h4>{{ object.Run_Stack }} </h4>
+            <h4>{{ object.Created_By }} </h4>
+            <h4>{{ object.Creation_Date }} </h4>
+            <h4>{{ object.BRD }} </h4>
+          </div>
+        </div>
+        <h5>{{ object.Web_Server }} </h5>
+        <h5>{{ object.IP_Address }} | {{ object.get_current_status_display }}</h5>
+
+      </div>
+      <div class="col-sm-8">
+        <div>
+          <div class="form-group border-bottom row">
+            <label class="col">
+              Hardware Specs
+            </label>
+            <div class="col">
+              {{ object.hardware }}
+            </div>
+          </div>
+
+          <div class="form-group border-bottom row">
+            <label class="col">
+              Product - Application
+            </label>
+            <div class="col">
+              {{ object.product_application}}
+            </div>
+          </div>
+
+          <div class="form-group border-bottom row">
+            <label class="col">
+              Provider
+            </label>
+            <div class="col">
+              {{ object.provider }}
+            </div>
+          </div>
+          <div class="form-group border-bottom row">
+            <label class="col">
+              Port
+            </label>
+            <div class="col">
+              {{ object.port }}
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+{% endblock content %}

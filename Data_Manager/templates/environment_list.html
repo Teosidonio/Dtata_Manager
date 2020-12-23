@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}environments{% endblock title %}
+
+{% block breadcrumb %}
+<a class="btn btn-primary" href="{% url 'create-environment' %}"><i
+    class="fas fa-plus"></i> New Environment</a>
+<a class="btn btn-primary" href="{% url 'upload-environment' %}"><i
+    class="fas fa-upload"></i> Upload Environment</a>
+{% endblock breadcrumb %}
+
+{% block content %}
+  <div class="table-responsive">
+    <table id="envtable" class="table table-bordered table-hover" data-page-length='50'>
+      <thead class="thead-light">
+        <tr>
+          <th>S/N</th>
+          <th>Stage</th>
+          <th>Platform</th>
+          <th>Database Type</th>
+          <th>Run_Satck</th>
+          <th>Web-Server</th>
+          <th>Ip-Server Name</th>
+          <th>Hardware Type</th>
+          <th>Product-App</th>
+          <th>Provider</th>
+          <th>Application Port</th>
+          <th>created_by</th>
+          <th>creation_date</th>
+          <th>brd</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for environment in environments %}
+          <tr class='clickable-row' data-href="{% url 'environment_detail' environment.id %}">
+            <td>{{ forloop.counter}}</td>
+            <td>{{ environment.stage}} {{environment.firstname }} {{environment.other_name }}</td>
+            <td>{{ environment.platform}}</td>
+            <td>{{ environment.database_type}}</td>
+            <td>{{ environment.run_stack}}</td>
+            <td>{{ environment.web_server}}</td>
+            <td>{{ environment.ip_servername}}</td>
+            <td>{{ environment.hardware}}</td>
+            <td>{{ environment.product_app}}</td>
+            <td>{{ environment.provider}}</td>
+            <td>{{ environment.application_port}}</td>
+            <td>{{ environment.created_by}}</td>
+            <td>{{ environment.creation_date}}</td>
+            <td>{{ environment.brd}}</td>
+          </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+{% endblock content %}
+
+
+{% block morejs %}
+<script>
+  $('#environmenttable').DataTable({
+  });
+</script>
+
+{% endblock morejs %}
